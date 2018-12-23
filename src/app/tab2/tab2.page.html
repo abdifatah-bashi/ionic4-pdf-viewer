@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two
+      Lastet ned
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <div *ngIf="myFiles">
+    <ion-list *ngFor="let file of myFiles">
+    <ion-item (click)="open(file)">
+        <ion-icon slot="start" size="small" name="document"></ion-icon>
+      {{file.name}}</ion-item>
+    </ion-list>
+  </div>
+</ion-content>
