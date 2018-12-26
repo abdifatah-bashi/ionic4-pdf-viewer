@@ -38,19 +38,5 @@ export class Tab1Page {
     });
   }
 
-  listFiles (){    
-    let path = null;
-    if (this.platform.is('ios')) {
-      path = this.file.documentsDirectory;
-      this.file.listDir( path,'')
-      .then(files => this.myFiles= files)
-      .catch(err => console.log("list file err: " + JSON.stringify(err))
-      );
-      console.log("number of files: " + this.myFiles.length);
-      this.myFiles.forEach(file => console.log("current file: " + JSON.stringify(file )));
-    } else if (this.platform.is('android')) {
-      path = this.file.dataDirectory;
-    }
-  }
-
+ 
 }
