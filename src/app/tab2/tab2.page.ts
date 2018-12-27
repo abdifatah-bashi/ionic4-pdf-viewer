@@ -17,16 +17,17 @@ export class Tab2Page {
 
 
     ionViewDidEnter(){
-     this.listFiles();
+   this.listFiles();
     }
   open(file){
- 
+   console.log("open file with Uri: " + file.nativeURL);
     const options: DocumentViewerOptions = {
       title: 'My PDF'
     }
     const url = file.nativeURL;
     this.document.viewDocument(url, 'application/pdf', options);   
   }
+
   listFiles (){    
     let path = null;
     if (this.platform.is('ios')) {
@@ -35,8 +36,11 @@ export class Tab2Page {
       path = this.file.dataDirectory;
     }
     this.file.listDir( path,'')
-      .then(files => this.myFiles= files)
+      .then(files => this.myFiles = files )
       .catch(err => console.log("list file err: " + JSON.stringify(err))
       );
   }
+
+ 
+
 }

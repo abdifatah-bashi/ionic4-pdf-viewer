@@ -15,8 +15,6 @@ export class Tab1Page {
   dummyPDFURL2 = "https://www.oapen.org/download?type=document&docid=577531";
   dummyPDFURL3 = "https://www.btboces.org/Downloads/3_Imagine%20by%20John%20Lennon.pdf";
   
-  //let barUrl= "https://test.buyandread.com/read/jarbladet-20181102_000_00_00.pdf?pub=1747&date=20181102&download=true";
-  //let url = "https://devdactic.com/html/5-simple-hacks-LBT.pdf";
   fileCount: number = 0;
 
   constructor(private document: DocumentViewer,
@@ -37,6 +35,11 @@ export class Tab1Page {
       this.document.viewDocument(url, 'application/pdf', {});
     });
   }
+   
+  openLocalPDF(){
+   let url = this.file.applicationDirectory+ 'www/assets/test.pdf';
+   this.document.viewDocument(url, 'application/pdf', {});
 
- 
+  }
+
 }
