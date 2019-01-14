@@ -1,3 +1,5 @@
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+
 import { Component } from '@angular/core';
 import { File } from '@ionic-native/file/ngx';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
@@ -19,6 +21,7 @@ export class Tab1Page {
 
   constructor(private document: DocumentViewer,
               private file : File,
+              private fileOpener : FileOpener,
               private transfer: FileTransfer, private platform: Platform) { }
               
   downloadAndOpen(url){
@@ -36,10 +39,20 @@ export class Tab1Page {
     });
   }
    
-  openLocalPDF(){
-   let url = this.file.applicationDirectory+ 'www/assets/test.pdf';
-   this.document.viewDocument(url, 'application/pdf', {});
+  
+  openWithIonicFileOpener(){
+    console.log("inside open with file opener");
+        let path = null;
+    if (this.platform.is('ios')) {
+      path = this.file.documentsDirectory;
+    } else if (this.platform.is('android')) {
+      path = this.file.dataDirectory;
+    }
 
+    let url = path + 'www/assets/test.pdf';
+    this.fileOpener.open(url, 'application/pdf')
+  .then(() => console.log('File is opened'))
+  .catch(e => console.log('Error opening file', e));
   }
 
 }
